@@ -1,0 +1,22 @@
+<AlertTransmission description="CustomRestPlugin" ruleEnabled="true" namekey="10">
+  <ResourceIdentifier key="Url" namekey="1" type="string" identType="0" length="0" required="true" disporder="1" default="" enum="false"/>
+  <ResourceIdentifier key="Username" namekey="2" type="string" identType="0" length="0" required="false" disporder="2" default="" enum="false"/>
+  <ResourceIdentifier key="Password" namekey="3" type="password" identType="0" length="0" required="false" disporder="3" default="" enum="false"/>
+  <ResourceIdentifier key="Certificate" namekey="4" type="string" identType="0" length="0" required="false" disporder="4" default="" enum="false"/>
+  <ResourceIdentifier key="ConnectionCount" namekey="5" type="int" identType="0" length="0" required="false" disporder="5" default="30" enum="false"/>
+  <ResourceIdentifier key="Method" namekey="6" type="enum" identType="0" length="0" required="true" disporder="6" default="" enum="true">
+    <enum default="" value="POST"/>
+    <enum default="" value="PUT"/>
+  </ResourceIdentifier>
+  <ResourceIdentifier key="Content-type" namekey="7" type="enum" identType="0" length="0" required="true" disporder="7" default="" enum="true">
+    <enum default="" value="application/xml"/>
+    <enum default="" value="application/json"/>
+    <enum default="" value="text/xml"/>
+    <enum default="" value="application/x-www-form-urlencoded"/>
+	</ResourceIdentifier>
+  <ResourceIdentifier key="Request" namekey="8" type="string" identType="0" length="0" required="true" disporder="8" default="" enum="false"/>
+  <ResourceIdentifier key="debuglogout" namekey="9" type="enum" identType="0" length="0" required="false" disporder="9" default="DISABLED" enum="true">
+    <enum default="" value="ENABLED"/>
+    <enum default="" value="DISABLED"/>
+	</ResourceIdentifier>
+</AlertTransmission>

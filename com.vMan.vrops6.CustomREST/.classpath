@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-4.5.jar"/>
+	<classpathentry kind="lib" path="libs/com.springsource.org.apache.commons.collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/com.springsource.org.apache.commons.lang-2.5.0.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.4.1.jar"/>
+	<classpathentry kind="lib" path="libs/vcops-alert-plugin-util-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/vcops-common-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/vcops-common-ui-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/vcops-analytics-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/vcops-platform-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/persistence-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
