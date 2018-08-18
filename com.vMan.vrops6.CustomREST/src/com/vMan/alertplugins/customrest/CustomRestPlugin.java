@@ -2,9 +2,10 @@ package com.vMan.alertplugins.customrest;
 
 import com.integrien.alive.common.adapter3.config.AlertTransmissionConfig;
 import com.integrien.alive.common.adapter3.describe.AlertTransmissionDescribe;
+import com.integrien.alive.common.dataobject.events.AlertBase;
 import com.integrien.alive.common.plugins.AlertPluginTestReply;
-import com.integrien.analytics.alertplugins.AlertPluginBase;
-import com.integrien.analytics.alertplugins.NotificationAlertBase;
+import com.integrien.analytics.plugins.alertplugins.AlertPluginBase;
+import com.integrien.analytics.plugins.alertplugins.NotificationAlertBase;
 import com.vmware.statsplatform.persistence.plugin.NotificationRuleData;
 import com.vmware.vcops.common.l10n.LocalizedMsg;
 import java.io.InputStream;

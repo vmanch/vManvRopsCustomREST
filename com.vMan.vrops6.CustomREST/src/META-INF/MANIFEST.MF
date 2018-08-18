@@ -1,5 +1,7 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.9.4
-Created-By: 1.7.0_79-b15 (Oracle Corporation)
+Archiver-Version: Plexus Archiver
+Built-By: mts
+Created-By: Apache Maven 3.2.3
+Build-Jdk: 1.8.0_111
 ENTRY_CLASS: com.vMan.alertplugins.customrest.CustomRestPlugin
 PLUGIN_KEY: CustomRestPlugin
