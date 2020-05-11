@@ -242,7 +242,7 @@ class CustomRestSender
 				}
 
 		if (body.contains("#alertname#")) {
-			body = body.replaceAll("#alertname#", alertDefName);
+			body = body.replaceAll("#alertname#", alertDefName.replace('"', ' '));
 			}
 
 		if (body.contains("#alertdescription#")) {
