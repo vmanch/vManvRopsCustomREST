@@ -2,18 +2,32 @@ package com.vMan.alertplugins.customrest;
 
 import com.integrien.alive.common.adapter3.config.AlertTransmissionConfig;
 import com.integrien.alive.common.adapter3.describe.AlertTransmissionDescribe;
+import com.integrien.alive.common.dataobject.events.AlertBase;
+import com.integrien.alive.common.plugins.generic.Configurable;
+import com.integrien.alive.common.plugins.generic.MetadataParser;
+import com.integrien.alive.common.plugins.generic.PluginMetadata;
+import com.integrien.alive.common.plugins.generic.PropertiesParser;
+import com.integrien.alive.common.plugins.generic.SyntaxException;
 import com.integrien.alive.common.plugins.AlertPluginTestReply;
-import com.integrien.analytics.alertplugins.AlertPluginBase;
-import com.integrien.analytics.alertplugins.NotificationAlertBase;
+import com.integrien.analytics.plugins.alertplugins.AlertPluginBase;
+import com.integrien.analytics.plugins.alertplugins.NotificationAlertBase;
 import com.vmware.statsplatform.persistence.plugin.NotificationRuleData;
 import com.vmware.vcops.common.l10n.LocalizedMsg;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.jar.Attributes;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,17 +40,45 @@ public class CustomRestPlugin
   private final AtomicReference<String> pluginInstanceId = new AtomicReference();
   private final AtomicBoolean sendJson = new AtomicBoolean(true);
   private final AtomicReference<CustomRestSender> sender = new AtomicReference();
+  private String configFolderPath;
   
   public CustomRestPlugin(Attributes attributes, String auxFolder)
   {
     super(attributes, auxFolder);
   }
   
-  public synchronized AlertTransmissionDescribe describe()
-  {
-    InputStream desc = getClass().getResourceAsStream("/describe.xml");
-    return AlertTransmissionDescribe.make(desc);
-  }
+  public synchronized PluginMetadata describe() {
+	    try (BufferedReader metadataBR = new BufferedReader(new InputStreamReader(new FileInputStream(
+	              getMetadataFilePath()), StandardCharsets.UTF_8))) {
+/*	Not needed for now
+	    	PluginMetadata ruleProperties; 
+*/
+	    	String content = metadataBR.lines().collect(Collectors.joining(System.lineSeparator()));
+	      
+	      PluginMetadata metadata = (new MetadataParser(content, "metadata")).parse();
+
+/*	Not needed for now	      
+	      try (BufferedReader confBR = new BufferedReader(new InputStreamReader(new FileInputStream(
+	                getConfigFilePath()), StandardCharsets.UTF_8))) {
+	        String confContent = confBR.lines().collect(Collectors.joining(System.lineSeparator()));
+	        ruleProperties = (new PropertiesParser(confContent, "properties")).parse();
+	        
+	      }
+ 
+	      
+	      metadata.setNotificationRuleProperties(ruleProperties.getNotificationRuleProperties());
+*/	      
+	      return metadata;
+	    } catch (SyntaxException|java.io.FileNotFoundException e) {
+	      logger.error(String.format("Unable to describe plugin %s", new Object[] { e.getMessage() }));
+	      return null;
+	    }
+	    catch (Exception e) {
+	      logger.error(String.format("Assertion: unable to describe plugin on %s: %s", new Object[] { this.configFolderPath, e
+	              .getMessage() }));
+	      return null;
+	    } 
+	  }
 
   public boolean configure(AlertTransmissionConfig rs)
   {
@@ -155,4 +197,19 @@ public class CustomRestPlugin
   }
   
   public void clear() {}
+  
+  /*	Not needed for now  
+	  public String getConfigFolderPath() {
+	    return this.configFolderPath;
+	  }
+*/
+	  
+/*	Not needed for now
+	private String getConfigFilePath() {
+	return this.configFolderPath + File.separator + "config.json";
+	}
+*/	  
+	  private String getMetadataFilePath() {
+	    return "/usr/lib/vmware-vcops/user/plugins/outbound/vman-custom-rest-plugin/metadata.json";
+	  }  
 }

@@ -1,7 +1,7 @@
 package com.vMan.alertplugins.customrest;
 
 import com.integrien.alive.alertplugins.util.AlertUtil;
-import com.integrien.analytics.alertplugins.NotificationAlertBase;
+import com.integrien.analytics.plugins.alertplugins.NotificationAlertBase;
 import com.vmware.vcops.analytics.alertdef.AlertDefinitionCache;
 import com.vmware.vcops.platform.api.model.alertdefinition.dataobject.AlertDefinition;
 import java.io.IOException;
@@ -234,7 +234,7 @@ class CustomRestSender
 	    		}   
 	    
 	    if (body.contains("#alertadapterkind#")) {
-	    		body = body.replaceAll("#alertadapterkind}", alertBase.getAdapterKind());
+	    		body = body.replaceAll("#alertadapterkind#", alertBase.getAdapterKind());
 	    		}
 	    
 		if (body.contains("#alertdefinitionid#")) {
@@ -242,7 +242,7 @@ class CustomRestSender
 				}
 
 		if (body.contains("#alertname#")) {
-			body = body.replaceAll("#alertname#", alertDefName);
+			body = body.replaceAll("#alertname#", alertDefName.replace('"', ' '));
 			}
 
 		if (body.contains("#alertdescription#")) {
